@@ -1,0 +1,97 @@
+http://shhawork.blogspot.com/2012/07/swing_11.html
+//구버전 이미지
+#1. "Module_input 파일"
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+
+class Module_Input {
+
+}
+
+class Input_Img_Frame extends Component { /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+// 일단은, 프레임 백그라운드 이미지.
+	 
+	    //버퍼를 활용한 이미지 클래스
+	 BufferedImage img;
+	  //String st1="C:\\Users\\LocketGoma\\Desktop\\1.png";
+	  //String st2="C:\\Users\\LocketGoma\\Desktop\\2.png";
+	  String st3="img\\bg.png";
+	  String st4="C:\\Users\\ResetFrame\\Desktop\\cap.png";
+	    public void paint(Graphics g) {
+	        g.drawImage(img, 0, 0, null); //그림을 그리는 메소드
+	    }
+	    //디폴트 생성자
+	 Input_Img_Frame() {
+	   	try {
+	        String filename=st4; // 파일의 경로  <<----- 특정 상황에서 바꾸는거 구현하자.
+	           img = ImageIO.read(new File(filename));   //이미지 파일을 불러오는 IO 메소드
+	                                //파일경로의 이미지 파일을 읽는다.
+	           System.out.println("불러왔니");
+	       } catch (IOException e) {
+	    	   System.out.println("형편없었어!");
+	        e.printStackTrace();
+	       }
+	    }
+
+	   
+	   /* public Dimension getPreferredSize() {
+	        if (img == null) {
+	             return new Dimension(800,600); //그림 파일이 없을 경우 프레임의 크기 강제 할당
+	        } else {
+	           return new Dimension(img.getWidth(null), img.getHeight(null)); //그림의 크기에 따라 화면의 크기를 변경한다.
+	       }
+	    } */
+} 
+
+--------------
+
+#2. Module_frame
+
+private void main_frame() {
+		comp = " V0.1";
+		frame = new JFrame("PJ "+comp);
+		frame.setFont(new Font("Comic_sence",0,12));
+		frame.setSize(800, 600);
+		frame.setPreferredSize(new Dimension(800,600));
+		
+		frame.add(new Input_Img_Frame()); // 배경이미지
+		
+		
+		
+		this.set_layout();
+		frame.setVisible(true);
+		this.button_frame(); //-- 씁니다 이거
+		
+		
+		/* 사망한 코드 일람
+		* this.image_upload(); <- 주김
+		*
+		*/
+	}
+	
+	private void set_layout(){  //<-- 여기가 문제
+
+		
+		
+		frame.setLayout(null); // 너는 왜
+		layout = new JLayeredPane();
+		layout.setBounds(0,0,800,600);
+		layout.setLayout(null); // 있는거니?
+		frame.add(new Input_Img_Frame()); 
+		System.out.println("뭐");
+		
+		
+		
+	}
+		

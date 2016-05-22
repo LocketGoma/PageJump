@@ -1,0 +1,28 @@
+public class ThreadExam
+{
+	public static void main(String[] args)
+	{
+		new Thread()
+		{
+			@Override
+			public void run()
+			{
+				for( int i = 0 ; i < 100 ; i++ )
+					System.out.println("첫번째 스레드" + i);
+			}
+
+		}.start(); // 스레드 실행
+
+		Thread thread = new Thread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				for( int i = 0 ; i < 100 ; i++ )
+					System.out.println("두번째 스레드" + i);
+			}
+		});
+
+		thread.start(); // 스레드 실행
+	}
+}
